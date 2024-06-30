@@ -1,0 +1,812 @@
+:root {
+    --main-font: "Raleway", sans-serif;
+    --second-font: ;
+    --sm-font-size: 1.6rem;
+    --md-font-size: 1.8rem;
+    --lg-font-size: 2rem;
+    --primary-color: #f9d210;
+    --secondary-color: ;
+    --primary-modal-color: rgba(36, 36, 36, 0.8);
+    --secondary-modal-color: ;
+    --black: #404040;
+    --white: #f9f9f9;
+    --background-color: rgb(150, 149, 149);
+    --menu-color: #242424;
+    --menu-background-color: #f9d210;
+    --container-width: 1200px;
+    --menu-size: 6rem;
+}
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-family: var(--main-font);
+    font-weight: lighter;
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: var(--sm-font-size);
+    color: var(--black);
+    background-color: #f5f5f7;
+    overflow-x: hidden;
+}
+h1 {
+    font-size: var(--md-font-size);
+    font-weight: 600;
+    text-align: center;
+}
+h2 {
+    font-size: var(--sm-font-size);
+    font-weight: 600;
+    text-align: left;
+}
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 40px;
+    background-color: #f5f5f7;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+button {
+    width: 100%;
+    height: 100%;
+    font-family: var(--main-font);
+    font-size: var(--sm-font-size);
+    color: var(--black);
+    background-color: var(--white);
+    border: none;
+    transition: all 200ms ease;
+}
+button:focus {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    font-weight: 600;
+}
+.menu {
+    display: grid;
+    grid-template-areas: 
+    "title title title"
+    "menu-icon menu-icon menu-icon"
+    "html css js"
+    "code code code";
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto 40vw auto 40vw;
+    width: 80%;
+    height: auto;
+    margin-bottom: 28px;
+    background-color: var(--white);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+}
+.menu-title {
+    grid-area: title;
+    width: 100%;
+    height: 100%;
+    padding: 8px 0 8px 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.menu_code-html {
+    grid-area: html;
+    border-right: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.menu_code-css {
+    grid-area: css;
+    border-right: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.menu_code-js {
+    grid-area: js;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.menu_code-html.is-active,
+.menu_code-css.is-active,
+.menu_code-js.is-active {
+    border-bottom: none;
+}
+.is-active .html-button,
+.is-active .css-button,
+.is-active .js-button {
+    font-weight: 600;
+    background-color: var(--white);
+    transition: all 200ms ease;
+}
+.html-button:hover,
+.css-button:hover,
+.js-button:hover {
+    color: var(--primary-color);
+    background-color: #f5f5f5;
+}
+.menu_icon {
+    grid-area: menu-icon;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    overflow-y: auto;  
+}
+.menu_code {
+    position: relative;
+    grid-area: code;
+    width: 100%;
+    height: auto;
+    background-color: var(--white);
+    border-radius: 0 0 12px 0;
+    overflow: hidden;
+}
+.code-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+    overflow-y: auto;
+    word-wrap: break-word;
+}
+.code {
+    width: 87%;
+    height: auto;
+    padding: 8px;
+    line-height: 2.4rem;
+    white-space: pre-wrap;
+}
+.copy-container {
+    width: 13%;
+    height: 100%;
+}
+.copy-button {
+    position: absolute;
+    top: 2%;
+    right: 8%;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border-radius: 50%;
+}
+.copy-button:hover {
+    background-color: #efefef;
+}
+.copy-icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    background-image: url("assets/icons/copy-clipboard.svg");
+}
+.copy-code {
+    display: none;
+}
+.copy-button:hover .copy-text {
+    display: block;
+    position: absolute;
+    top: 110%;
+    right: 20%;
+    width: max-content;
+    height: auto;
+    padding: 4px;
+    font-size: var(--sm-font-size);
+    font-weight: 100;
+    color: var(--white);
+    background-color: var(--black);
+}
+.copied-code {
+    display: none;
+}
+.copied {
+    display: block;
+    position: absolute;
+    top: 4%;
+    right: 20%;
+    width: max-content;
+    height: auto;
+    padding: 4px;
+    color: var(--white);
+    background-color: var(--black);
+}
+/* ******************** similar code for all menus ******************** */
+.hamburger-menu_button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: var(--menu-size);
+    height: var(--menu-size);
+    background-color: var(--menu-background-color);
+    border: none;
+    border-radius: 50%;
+    z-index: 999;
+}
+.hamburguer-icon {
+    position: relative;
+    width: 49%;
+    height: 31%;
+}
+.hamburger__bar-1,
+.hamburger__bar-1::before,
+.hamburger__bar-1::after {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: var(--menu-color);
+    border-radius: 25px;
+}
+/* ******************** asymmetric hambuger button css ******************** */
+.asymmetric .hamburguer-icon {
+    top: 0;
+}
+/* ******************** asymmetric animation starts ******************** */
+.asymmetric .hamburger__bar-1,
+.asymmetric .hamburger__bar-1::before,
+.asymmetric .hamburger__bar-1::after {
+    position: absolute;
+    display: block;
+    background-color: var(--menu-color);
+    border-radius: 25px;
+    transition: transform 0.15s cubic-bezier(0.68, -0.6, 0.21, 1.03),
+    width 0.1s ease;
+}
+.asymmetric .hamburger__bar-1 {
+    width: 100%;
+    height: 14%;
+    top: 43%;
+}
+.asymmetric .hamburger__bar-1::before {
+    content: "";
+    width: 50%;
+    height: 100%;
+    top: -0.8rem;
+    opacity: 1;
+}
+.asymmetric .hamburger__bar-1::after {
+    content: "";
+    width: 75%;
+    height: 100%;
+    top: 0.8rem;
+    right: 24%;
+}
+.asymmetric .is-active .hamburger__bar-1 {
+    transition: transform 0.15s cubic-bezier(0.68, -0.6, 0.21, 1.03);
+    transform: rotate(-45deg);
+}
+.asymmetric .is-active .hamburger__bar-1::before {
+    transition: transform 0.15s cubic-bezier(0.68, -0.6, 0.21, 1.03);
+    transform: translate(0.75rem, 0.07rem) rotate(90deg);
+}
+.asymmetric .is-active .hamburger__bar-1::after {
+    transition: transform 0.15s cubic-bezier(0.68, -0.6, 0.21, 1.03);
+    width: 55%;   
+    transform: translate(0.08rem, -0.1rem) rotate(-90deg);
+}
+/* ******************** asymmetric animation ends ******************** */
+
+/* ******************** twister hambuger button css ******************** */
+
+.twister .hamburguer-icon {
+    transition: transform 0.1s ease;
+}
+.twister .hamburguer-icon.is-active {
+    transition: transform 0.2s ease;
+    transform: rotate(360deg);
+}
+/* ******************** twister animation starts ******************** */
+.twister .hamburger__bar-1,
+.twister .hamburger__bar-1::before,
+.twister .hamburger__bar-1::after {
+    transition: transform 0.1s ease;
+
+}
+.twister .hamburger__bar-1 {
+    top: 43%;
+    height: 14%;
+}
+.twister .hamburger__bar-1::before {
+    content: "";
+    height: 100%;
+    top: -0.8rem;
+    opacity: 1;
+}
+.twister .hamburger__bar-1::after {
+    content: "";
+    height: 100%;
+    top: 0.8rem;
+}
+
+.twister .is-active .hamburger__bar-1 {
+    transition: transform 0.1s ease;
+    transform: rotate(135deg);
+}
+.twister .is-active .hamburger__bar-1::before {
+    opacity: 0;
+    transform: rotate(90deg);
+    top: 0;
+}
+.twister .is-active .hamburger__bar-1::after {
+    transition: transform 0.1s ease;
+    top: 0;
+    transform: rotate(90deg);
+}
+/* ******************** twister animation ends ******************** */
+
+/* ******************** revolx hambuger button css ******************** */
+.revolx .hamburguer-icon {
+    transition: transform 0.1s ease 0.1s;
+}
+.revolx .hamburguer-icon.is-active {
+    transition: transform 0.1s ease;
+    transform: rotate(90deg);
+}
+/* ******************** revolx animation starts ******************** */
+.revolx .hamburger__bar-1,
+.revolx .hamburger__bar-1::before,
+.revolx .hamburger__bar-1::after {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: var(--menu-color);
+    border-radius: 25px;
+    transition: transform 0.1s ease,
+    top 0.1s ease,
+    opacity 0.1s ease;
+}
+.revolx .hamburger__bar-1 {
+    top: 43%;
+    height: 14%;
+}
+.revolx .hamburger__bar-1::before {
+    content: "";
+    top: -0.8rem;
+    height: 100%;
+    opacity: 1;
+}
+.revolx .hamburger__bar-1::after {
+    content: "";
+    top: 0.8rem;
+    height: 100%;
+}
+.revolx .is-active .hamburger__bar-1 {
+    transition: transform 0.1s ease 0.1s;
+    transform: rotate(-45deg);
+}
+.revolx .is-active .hamburger__bar-1::before {
+    transition: opacity 0.1s ease 0.1s;
+    opacity: 0;
+}
+.revolx .is-active .hamburger__bar-1::after {
+    transition: transform 0.1s ease 0.1s,
+    top 0.1s ease 0.1s;
+    transform: rotate(90deg);
+    top: 0;
+}
+/* ******************** revolx animation ends ******************** */
+
+/* ******************** crush animation starts ******************** */
+.crush .hamburger__bar-1,
+.crush .hamburger__bar-1::before,
+.crush .hamburger__bar-1::after {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: var(--menu-color);
+    border-radius: 25px;
+    transition: transform 0.1s ease,
+    top 0.1s ease 0.1s;
+}
+.crush .hamburger__bar-1 {
+    top: 43%;
+    height: 14%;
+}
+.crush .hamburger__bar-1::before {
+    content: "";
+    top: -0.8rem;
+    height: 100%;
+    transition: all 0.1s ease;
+    opacity: 1;
+}
+.crush .hamburger__bar-1::after {
+    content: "";
+    height: 100%;
+    top: 0.8rem;
+}
+.crush .is-active .hamburger__bar-1 {
+    transition: transform 0.1s ease 0.1s;
+    transform: rotate(-45deg);
+}
+.crush .is-active .hamburger__bar-1::before {
+    transition: opacity 0.1s ease 0.1s,
+    top 0.1s ease;
+    top: 0;
+    opacity: 0;
+}
+.crush .is-active .hamburger__bar-1::after{
+    transition: transform 0.1s ease 0.1s,
+    top 0.1s ease;
+    top: 0;
+    transform: rotate(90deg);
+}
+/* ******************** crush animation ends ******************** */
+
+/* ******************** jump hambuger button css ******************** */
+.jump .hamburguer-icon {
+    top: 0;
+}
+/* ******************** jump animation starts ******************** */
+.jump .hamburger__bar-1,
+.jump .hamburger__bar-1::before,
+.jump .hamburger__bar-1::after {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: var(--menu-color);
+    border-radius: 25px;
+    transition: transform 0.1s ease,
+    top 0.1s ease,
+    bottom 0.2s ease 0.2s,
+    opacity 0.1s ease 0.2s;
+}
+.jump .hamburger__bar-1 {
+    top: 43%;
+    height: 14%;
+}
+.jump .hamburger__bar-1::before {
+    content: "";
+    top: -0.8rem;
+    height: 100%;
+}
+.jump .hamburger__bar-1::after {
+    content: "";
+    bottom: -0.8rem;
+    height: 100%;
+    opacity: 1;
+}
+.jump .is-active .hamburger__bar-1 {
+    transition: top 0.1s ease 0.2s,
+    transform 0.2s ease 0.2s;
+    top: 42%;
+    transform: rotate(45deg);
+}
+.jump .is-active .hamburger__bar-1::before {
+    transition: transform 0.2s ease 0.2s,
+    top 0.1s ease 0.2s;
+    top: 0;
+    transform: rotate(-90deg);
+}
+.jump .is-active .hamburger__bar-1::after {
+    transition: bottom 0.2s ease,
+    opacity 0.2s ease 0.1s;
+    bottom: 84%;
+    opacity: 0;
+}
+/* ******************** jump animation ends ******************** */
+
+/* ******************** spinner animation starts ******************** */
+.spinner .hamburger__bar-1,
+.spinner .hamburger__bar-1::before,
+.spinner .hamburger__bar-1::after {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: var(--menu-color);
+    border-radius: 25px;
+    transition: transform 0.1s ease,
+    top 0.1s ease 0.1s;
+}
+.spinner .hamburger__bar-1 {
+    top: 43%;
+    height: 14%;
+}
+.spinner .hamburger__bar-1::before {
+    content: "";
+    top: -0.8rem;
+    height: 100%;
+    transition: all 0.1s ease;
+    opacity: 1;
+}
+.spinner .hamburger__bar-1::after {
+    content: "";
+    height: 100%;
+    top: 0.8rem;
+}
+.spinner .is-active .hamburger__bar-1 {
+    transition: transform 0.1s ease 0.1s;
+    transform: rotate(135deg);
+}
+.spinner .is-active .hamburger__bar-1::before {
+    transition: opacity 0.1s ease 0.1s,
+    top 0.1s ease;
+    top: 0;
+    opacity: 0;
+}
+.spinner .is-active .hamburger__bar-1::after {
+    transition: transform 0.1s ease 0.1s,
+    top 0.1s ease;
+    top: 0;
+    transform: rotate(90deg);
+}
+/* ******************** spinner animation ends ******************** */
+
+/* ******************** runner animation starts ******************** */
+.runner .hamburger__bar-1,
+.runner .hamburger__bar-1::before,
+.runner .hamburger__bar-1::after {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: var(--menu-color);
+    border-radius: 25px;
+    transition: transform 0.1s ease,
+    left 0.1s ease 0.1s,
+    top 0.1s ease;
+}
+.runner .hamburger__bar-1 {
+    top: 0;
+    height: 14%;
+}
+.runner .hamburger__bar-1::before {
+    content: "";
+    top: 0.8rem;
+    height: 100%;
+    opacity: 1;
+    left: 0;
+}
+.runner .hamburger__bar-1::after {
+    content: "";
+    height: 100%;
+    top: 1.6rem;
+}
+.runner .is-active .hamburger__bar-1 {
+    transition: transform 0.1s ease 0.2s,
+    top 0s ease 0.2s;
+    transform: rotate(45deg);
+    top: 43%;
+}
+.runner .is-active .hamburger__bar-1::before {
+    transition: opacity 0s ease 0.1s,
+    left 0s ease;
+    left: -4px;
+    opacity: 0;
+}
+.runner .is-active .hamburger__bar-1::after {
+    transition: transform 0.1s ease 0.2s,
+    top 0.1s ease 0.2s;
+    top: 0;
+    transform: rotate(-90deg);
+}
+/* ******************** runner animation ends ******************** */
+
+/* ******************** minion hambuger button css ******************** */
+.minion .hamburguer-icon {
+    top: 0;
+}
+/* ******************** minion animation starts ******************** */
+.minion .hamburger__bar-1,
+.minion .hamburger__bar-1::before,
+.minion .hamburger__bar-1::after {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: var(--menu-color);
+    border-radius: 25px;
+    transition: top 0.1s ease,
+    bottom 0.1s ease;
+}
+.minion .hamburger__bar-1 {
+    top: 43%;
+    height: 14%;
+}
+.minion .hamburger__bar-1::before {
+    content: "";
+    height: 100%;
+    top: -0.8rem;
+}
+.minion .hamburger__bar-1::after {
+    content: "";
+    height: 100%;
+    top: 0.8rem;
+}
+.minion .is-active .hamburger__bar-1::before {
+    transition: top 0.1s ease;
+    top: 0;
+}
+.minion .is-active .hamburger__bar-1::after {
+    transition: top 0.1s ease;
+    top: 0;
+}
+/* ******************** minion animation ends ******************** */
+
+/* ******************** fantastic hambuger button css ******************** */
+.fantastic .hamburguer-icon {
+    top: 0;
+}
+/* ******************** fantastic animation starts ******************** */
+.fantastic .hamburger__bar-1,
+.fantastic .hamburger__bar-1::before,
+.fantastic .hamburger__bar-1::after {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: var(--menu-color);
+    border-radius: 25px;
+    transition: transform 0.275s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+    opacity 0.3s ease 0.1s;
+}
+.fantastic .hamburger__bar-1 {
+    top: 0;
+    height: 14%;
+}
+.fantastic .hamburger__bar-1::before {
+    content: "";
+    top: 0.8rem;
+    height: 100%;
+    opacity: 1;
+}
+.fantastic .hamburger__bar-1::after {
+    content: "";
+    height: 100%;
+    top: 1.6rem;
+}
+.fantastic .is-active .hamburger__bar-1 {
+    transition: transform 0.275s 0.1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform: translateY(8px) rotate(135deg);
+}
+.fantastic .is-active .hamburger__bar-1::before {
+    transition: opacity 0.1s ease 0.1s;
+    opacity: 0;
+}
+.fantastic .is-active .hamburger__bar-1::after {
+    transition: transform 0.275s 0.1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform: translateY(-16px) rotate(-90deg);
+}
+/* ******************** elastic animation ends ******************** */
+
+/* ******************** crumble animation starts ******************** */
+.crumble .hamburger__bar-1,
+.crumble .hamburger__bar-1::before,
+.crumble .hamburger__bar-1::after {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: var(--menu-color);
+    border-radius: 25px;
+    transition: transform 0.1s ease,
+    top 0.1s ease 0.1s,
+    opacity 0.1s ease;
+}
+.crumble .hamburger__bar-1 {
+    top: 43%;
+    height: 14%;
+}
+.crumble .hamburger__bar-1::before {
+    content: "";
+    top: -0.8rem;
+    height: 100%;
+    opacity: 1;
+}
+.crumble .hamburger__bar-1::after {
+    content: "";
+    height: 100%;
+    bottom: -0.8rem;
+}
+.crumble .is-active .hamburger__bar-1 {
+    transition: transform 0.1s ease 0.1s,
+    top 0.1s ease;
+    transform: rotate(-135deg);
+}
+.crumble .is-active .hamburger__bar-1::before {
+    transition: opacity 0.1s ease;
+    top: 0;
+    opacity: 0;
+}
+.crumble .is-active .hamburger__bar-1::after {
+    transition: transform 0.1s ease;
+    bottom: 0;
+    transform: rotate(-90deg);
+}
+/* ******************** collapse animation ends ******************** */
+
+/* ******************** monotonous hambuger button css ******************** */
+.monotonous .hamburguer-icon {
+    top: 0;
+}
+/* ******************** boring animation starts ******************** */
+.monotonous .hamburger__bar-1,
+.monotonous .hamburger__bar-1::before,
+.monotonous .hamburger__bar-1::after {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: var(--menu-color);
+    border-radius: 25px;
+}
+.monotonous .hamburger__bar-1 {
+    top: 43%;
+    height: 14%;
+}
+.monotonous .hamburger__bar-1::before {
+    content: "";
+    top: -0.8rem;
+    height: 100%;
+    opacity: 1;
+}
+.monotonous .hamburger__bar-1::after {
+    content: "";
+    top: 0.8rem;
+    height: 100%;
+}
+.monotonous .is-active  .hamburger__bar-1 {
+    transform: rotate(45deg);
+}
+.monotonous .is-active  .hamburger__bar-1::before {
+    opacity: 0;
+}
+.monotonous .is-active  .hamburger__bar-1::after {
+    top: 0;
+    transform: rotate(90deg);
+}
+/* ******************** monotonous animation ends ******************** */
+footer {
+    width: 100%;
+    height: 40px;
+    font-weight: 600;
+    text-align: center;
+    padding: 8px 0;
+    background-color: #efefef;
+}
+@media (min-width: 800px) {
+    h2 {
+        font-size: var(--md-font-size);
+    }
+    .menu {
+        grid-template-areas: 
+        "title html css js"
+        "menu-icon code code code";
+        grid-template-columns: 3fr 1fr 1fr 1fr;
+        grid-template-rows: auto 25vw;
+        width: 60%;
+        height: auto;
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+    .menu-title {
+        border-right: 1px solid rgba(0,0,0,0.1);
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .menu_code-html {
+        border-right: 1px solid rgba(0,0,0,0.1);
+    }
+    .menu_code-css {
+        border-right: 1px solid rgba(0,0,0,0.1);
+    }
+    .menu_code-html,
+    .menu_code-css,
+    .menu_code-js {
+        border-top: none;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .menu_icon {
+        border-right: 1px solid rgba(0,0,0,0.1);
+    }
+    .html-button,
+    .css-button,
+    .js-button {
+        font-size: var(--md-font-size);
+    }
+    .js-button {
+        border-radius: 0 12px 0 0;
+    }
+}
