@@ -82,9 +82,9 @@ button:focus {
     "html css js"
     "code code code";
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto 40vw auto 40vw;
+    grid-template-rows: 1fr 4fr 1fr 4fr;
     width: 80%;
-    height: auto;
+    height: 600px;
     margin-bottom: 28px;
     background-color: var(--white);
     border: 1px solid rgba(0,0,0,0.1);
